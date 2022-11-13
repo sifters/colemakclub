@@ -65,8 +65,8 @@ var answerString = "";		  // A string representation of the words for the curren
 						  // no words in answerString
 var keyboardMap = layoutMaps['colemak'];
 var letterDictionary = levelDictionaries['colemak'];
-var currentLayout = localStorage.getItem('currentLayout') || 'colemak';
-var currentKeyboard = localStorage.getItem('currentKeyboard') || 'ansi';
+var currentLayout = localStorage.getItem('currentLayout') || 'colemakdh';
+var currentKeyboard = localStorage.getItem('currentKeyboard') || 'ortho';
 var shiftDown 			= false; // tracks whether the shift key is currently being pushed
 var fullSentenceMode 	= false; // if true, all prompts will be replace with sentences
 var fullSentenceModeEnabled = localStorage.getItem('fullSentenceModeEnabled') === 'true';
