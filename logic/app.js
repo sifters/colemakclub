@@ -522,6 +522,14 @@ function updateLayoutUI() {
 			layoutMaps.colemakdh.KeyV = 'v';
 			layoutMaps.colemakdh.KeyB = 'z';
 
+			layoutMaps.tarmakdh.KeyZ = 'x';
+			layoutMaps.tarmakdh.KeyX = 'c';
+			layoutMaps.tarmakdh.KeyC = 'd';
+			layoutMaps.tarmakdh.KeyV = 'v';
+			layoutMaps.tarmakdh.KeyB = 'z';
+			levelDictionaries.tarmakdh.lvl1 = 'qwagv';
+			levelDictionaries.tarmakdh.lvl3 = 'ftbzxc';
+
 			layoutMaps.canary.KeyZ = 'j';
 			layoutMaps.canary.KeyX = 'v';
 			layoutMaps.canary.KeyC = 'd';
@@ -542,6 +550,15 @@ function updateLayoutUI() {
 			layoutMaps.colemakdh.KeyV = 'v';
 			delete layoutMaps.colemakdh.KeyB;
 
+			layoutMaps.tarmakdh.IntlBackslash = 'z';
+			layoutMaps.tarmakdh.KeyZ = 'x';
+			layoutMaps.tarmakdh.KeyX = 'c';
+			layoutMaps.tarmakdh.KeyC = 'd';
+			layoutMaps.tarmakdh.KeyV = 'v';
+			delete layoutMaps.tarmakdh.KeyB;
+			levelDictionaries.tarmakdh.lvl1 = 'qwagv';
+			levelDictionaries.tarmakdh.lvl3 = 'ftbzxc';
+
 			layoutMaps.canary.IntlBackslash = 'q';
 			layoutMaps.canary.KeyZ = 'j';
 			layoutMaps.canary.KeyX = 'v';
@@ -561,6 +578,14 @@ function updateLayoutUI() {
 			layoutMaps.colemakdh.KeyC = 'c';
 			layoutMaps.colemakdh.KeyV = 'd';
 			layoutMaps.colemakdh.KeyB = 'v';
+
+			layoutMaps.tarmakdh.KeyZ = 'z';
+			layoutMaps.tarmakdh.KeyX = 'x';
+			layoutMaps.tarmakdh.KeyC = 'c';
+			layoutMaps.tarmakdh.KeyV = 'd';
+			layoutMaps.tarmakdh.KeyB = 'v';
+			levelDictionaries.tarmakdh.lvl1 = 'qwagzxc';
+			levelDictionaries.tarmakdh.lvl3 = 'ftbv';
 
 			layoutMaps.canary.KeyZ = 'q';
 			layoutMaps.canary.KeyX = 'j';
@@ -583,6 +608,16 @@ function updateLayoutUI() {
 		customInput.style.transform = 'scaleX(0)';
 		openUIButton.style.display = 'none';
 	}
+
+	// level labels
+	for (let i = 1; i <= 6; i++) {
+		if(currentLayout == 'tarmak' || currentLayout == 'tarmakdh') {
+			document.querySelector('.lvl'+i).innerHTML = 'Step '+(i-1);
+		} else {
+			document.querySelector('.lvl'+i).innerHTML = 'Level '+i;
+		}
+	}
+
 	// change keyboard map and key dictionary
 	keyboardMap = layoutMaps[currentLayout];
 	console.log(currentLayout);
@@ -995,8 +1030,8 @@ input.addEventListener('keydown', (e)=> {
 	/*___________________________________________________*/
 
 
-	/*_________________________________________________________________________*/
-	/*____________________listener for space and enter keys____________________*/
+	/*________________________________________________________________________________________*/
+	/*____________________listener for space and enter keys and reset keys____________________*/
 	// listens for the enter  and space key. Checks to see if input contains the
 	// correct word. If yes, generate new word. If no, give user
 	// negative feedback
@@ -1033,8 +1068,16 @@ input.addEventListener('keydown', (e)=> {
 		}
 	}// end keyEvent if statement
 
-	/*____________________listener for space and enter keys____________________*/
-	/*_________________________________________________________________________*/
+	if(e.keyCode === 9 || e.keyCode === 27) {
+		// 9 = Tab, 27 = Esc
+		reset();
+	} else if (e.keyCode === 116) {
+		// F5 does not reload page because of the input area without this if-else
+		window.location.reload();
+	}// end of reset key check
+
+	/*____________________listener for space and enter keys and reset keys____________________*/
+	/*________________________________________________________________________________________*/
 
 
 
@@ -1164,6 +1207,9 @@ for(button of buttons) {
 		let lev = b.innerHTML.replace(/ /,'').toLowerCase();
 		// int representation of level we are choosing
 		lev = (lev[lev.length-1]);
+		if(currentLayout == 'tarmak' || currentLayout == 'tarmakdh') {
+			lev++;
+		}
 		if(b.innerHTML == 'All Words') {
 			lev = 7;
 		}else if(b.innerHTML == 'Full Sentences'){
