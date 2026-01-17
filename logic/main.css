@@ -267,7 +267,7 @@ button:focus {
 	    -ms-flex-direction: column;
 	        flex-direction: column;
 	/*justify-content: center;*/
-	width: 67vmin;
+	width: 120vmin;
 	/*height: 30vmin;*/
 }
 
